@@ -1,0 +1,29 @@
+.label {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+}
+.label {
+  display: flex;
+  flex-direction: column;
+  max-width: 200px;
+  color: #000000ab;
+}
+button {
+  margin: 5px 10px;
+  background-color: #000000ab;
+  color: white;
+  border-radius: 7px;
+  border-color: #070607ab;
+}
+button:hover {
+  background-color: white;
+  color: #6ae704e7;
+  border-color: #03e70eab;
+}
+.form {
+  width: 300px;
+  padding: 20px;
+  display: block;
+  border: 1px solid #000000ab;
+}
