@@ -1,15 +1,21 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { PhonebookForm } from './components/PhonebookForm/PhonebookForm';
 import { FilterContacts } from './components/FilterContacts/FilterContacts';
 import { Contacts } from './components/Contacts/Contacts';
-import { nanoid } from 'nanoid';
 import { useSelector, useDispatch } from 'react-redux';
-import { addContact, deleteContact, setFilter, selectContacts, selectFilter } from './redux/contactsSlice';
+import { addContact, deleteContact, setFilter, fetchContacts, selectContacts, selectFilter, selectIsLoading, selectError } from './redux/contactsSlice';
 
 export const App = () => {
   const dispatch = useDispatch();
   const contacts = useSelector(selectContacts);
   const filter = useSelector(selectFilter);
+  const isLoading = useSelector(selectIsLoading);
+  const error = useSelector(selectError);
+
+  // Fetch contacts from the server when the component mounts
+  useEffect(() => {
+    dispatch(fetchContacts());
+  }, [dispatch]);
 
   const handleFilterChange = e => {
     dispatch(setFilter(e.target.value));
@@ -29,13 +35,7 @@ export const App = () => {
       return;
     }
 
-    const newContact = {
-      id: nanoid(),
-      name,
-      number,
-    };
-
-    dispatch(addContact(newContact));
+    dispatch(addContact({ name, number }));
   };
 
   const handleDeleteContact = contactId => {
@@ -49,6 +49,10 @@ export const App = () => {
 
       <h2 className="title">Contacts</h2>
       <FilterContacts filter={filter} onFilterChange={handleFilterChange} />
+      
+      {isLoading && <p>Loading...</p>}
+      {error && <p>Error: {error}</p>}
+      
       <Contacts
         contacts={filteredContacts}
         onDeleteContact={handleDeleteContact}

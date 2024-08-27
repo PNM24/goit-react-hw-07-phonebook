@@ -1,14 +1,21 @@
-.label {
-  margin-top: 10px;
+.filter {
+  margin-bottom: 20px;
   display: flex;
-  flex-direction: column;
-  color: #000000ab;
+  justify-content: center;
 }
-.label .input {
-  width: 300px;
-  height: 20px;
-  font-weight: 500;
-  border-radius: 6px;
-  font-size: 18px;
-  color: #0400fdab;
+
+.filter input {
+  width: 100%;
+  max-width: 400px;
+  padding: 14px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.filter input:focus {
+  border-color: #4285f4;
+  box-shadow: 0 0 8px rgba(66, 133, 244, 0.2);
+  outline: none;
 }
